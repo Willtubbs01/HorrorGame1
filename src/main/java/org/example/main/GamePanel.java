@@ -5,6 +5,8 @@ import org.example.panel.PanelID;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GamePanel extends JPanel {
 
@@ -14,8 +16,20 @@ public class GamePanel extends JPanel {
     public GamePanel() {
         panelID = PanelID.MENU;
 
+        this.setLayout(null);
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+        this.setFocusable(true);
+        this.requestFocus();
+
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (panelID == PanelID.MENU) {
+                    menuPanel.mousePressed(e);
+                }
+            }
+        });
     }
 
 

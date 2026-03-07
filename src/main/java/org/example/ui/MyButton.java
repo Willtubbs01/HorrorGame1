@@ -1,13 +1,17 @@
 package org.example.ui;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MyButton {
-    private int x;
-    private int y;
-    private int width;
-    private int height;
-    private String text;
+    int x, y, width, height;
+    String text;
 
     public MyButton(int x, int y, int width, int height, String text) {
         this.x = x;
@@ -15,22 +19,33 @@ public class MyButton {
         this.width = width;
         this.height = height;
         this.text = text;
-
     }
 
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.gray);
+        g2.setColor(Color.GRAY);
         g2.fillRect(x, y, width, height);
+
+        g2.setColor(Color.WHITE);
         FontMetrics fm = g2.getFontMetrics();
-        int StringWidth = fm.stringWidth(text);
-        int StringHeight = fm.getAscent();
+        int stringWidth = fm.stringWidth(text);
+        int stringHeight = fm.getAscent();
 
-        int setX = this.x + (this.width - StringWidth) / 2;
-        int setY = this.y + (this.height + StringHeight) / 2;
-        g2.setColor(Color.white);
+        int setX = x + (width - stringWidth) / 2;
+        int setY = y + (height + stringHeight) / 2 - 2;
+
         g2.drawString(text, setX, setY);
+    }
 
-        g2.setColor(Color.green);
-//        g2.drawLine(x, y/2 + y, x+width,  y/2 + y);
+    public boolean contains(int mx, int my) {
+        return mx >= x && mx <= x + width &&
+                my >= y && my <= y + height;
+    }
+
+    private class CustomMouseListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Play Clicked");
+        }
     }
 }
