@@ -69,7 +69,6 @@ public class MenuPanel {
         if (play.contains(mx, my)) {
             play.setButtonColor(Color.darkGray.darker());
             System.out.println("Play Clicked");
-            gp.setPanelID(PanelID.PLAY);
         }
         if (exit.contains(mx, my)) {
             exit.setButtonColor(Color.darkGray.darker());
@@ -82,6 +81,7 @@ public class MenuPanel {
         int my = e.getY();
         if (play.contains(mx, my)) {
             play.setButtonColor(Color.darkGray);
+            gp.setPanelID(PanelID.PLAY);
         }
         if (exit.contains(mx, my)) {
             System.exit(0);
