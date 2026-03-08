@@ -2,6 +2,7 @@ package org.example.main;
 
 import org.example.panel.MenuPanel;
 import org.example.panel.PanelID;
+import org.example.ui.KeyHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +17,10 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     public Random rand = new Random();
 
-    PanelID panelID;
+    public static PanelID panelID;
     MenuPanel menuPanel = new MenuPanel(this);
+
+    KeyHandler keyH =  new KeyHandler();
 
     public GamePanel() {
         panelID = PanelID.MENU;
@@ -27,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.requestFocus();
+        this.addKeyListener(keyH);
 
         this.addMouseListener(new MouseAdapter() {
             @Override
