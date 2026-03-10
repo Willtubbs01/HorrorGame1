@@ -15,6 +15,7 @@ public class GameFrame extends JFrame {
         this.setTitle("Horror Game");
         this.setIconImage(Objects.requireNonNull(setTitleIcon()).getImage());
         this.setResizable(false);
+        this.setUndecorated(true);
 
         GamePanel gamePanel = new GamePanel();
         this.add(gamePanel);

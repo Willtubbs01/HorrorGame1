@@ -76,6 +76,14 @@ public class MyButton {
         return height;
     }
 
+    public void setX(int buttonScreenX) {
+        this.x = buttonScreenX;
+    }
+
+    public void setY(int buttonScreenY) {
+        this.y = buttonScreenY;
+    }
+
     private class CustomMouseListener implements ActionListener, MouseMotionListener {
 
         @Override
