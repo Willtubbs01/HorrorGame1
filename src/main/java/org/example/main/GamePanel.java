@@ -2,6 +2,7 @@ package org.example.main;
 
 import org.example.panel.MenuPanel;
 import org.example.panel.PanelID;
+import org.example.panel.PlayPanel;
 import org.example.ui.KeyHandler;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public static PanelID panelID;
     MenuPanel menuPanel = new MenuPanel(this);
+    PlayPanel playPanel = new PlayPanel(this);
 
     KeyHandler keyH =  new KeyHandler();
 
@@ -38,11 +40,19 @@ public class GamePanel extends JPanel implements Runnable{
                 if (panelID == PanelID.MENU) {
                     menuPanel.mousePressed(e);
                 }
+
+                if (panelID == PanelID.PLAY) {
+                    playPanel.mousePressed(e);
+                }
             }
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (panelID == PanelID.MENU) {
                     menuPanel.mouseReleased(e);
+                }
+
+                if (panelID == PanelID.PLAY) {
+                    playPanel.mouseReleased(e);
                 }
             }
         });
@@ -52,6 +62,10 @@ public class GamePanel extends JPanel implements Runnable{
                 if (panelID == PanelID.MENU) {
                     menuPanel.mouseMoved(e);
                 }
+
+                if (panelID == PanelID.PLAY) {
+                    playPanel.mouseMoved(e);
+                }
             }
         });
     }
@@ -59,6 +73,10 @@ public class GamePanel extends JPanel implements Runnable{
     private void update(){
         if(PanelID.MENU == panelID){
             menuPanel.update();
+        }
+
+        if(PanelID.PLAY == panelID){
+            playPanel.update();
         }
     }
 
@@ -70,6 +88,10 @@ public class GamePanel extends JPanel implements Runnable{
 
         if(panelID == PanelID.MENU) {
             menuPanel.draw(g2);
+        }
+
+        if(panelID == PanelID.PLAY) {
+            playPanel.draw(g2);
         }
 
         g2.dispose();
