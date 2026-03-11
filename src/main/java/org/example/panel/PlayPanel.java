@@ -4,14 +4,19 @@ import org.example.main.GameFrame;
 import org.example.main.GamePanel;
 import org.example.ui.MyButton;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class PlayPanel {
 
     private final GamePanel gp;
     private MyButton leftButton;
     private MyButton rightButton;
+
+    BufferedImage background;
 
     private final int GAME_WIDTH;
     private final int GAME_HEIGHT;
@@ -35,7 +40,18 @@ public class PlayPanel {
         GAME_WIDTH = (int) (GameFrame.WIDTH * 1.2);
         GAME_HEIGHT = GameFrame.HEIGHT;
 
+        System.out.println("WIDTH: " + GAME_WIDTH + " HEIGHT: " + GAME_HEIGHT);
         setUpButtons();
+        setBackgroundImage();
+    }
+
+    private void setBackgroundImage() {
+
+        try{
+            background = ImageIO.read(new File("src/main/resources/backgrounds/OfficeMSP.png"));
+        }catch(Exception e){
+
+        }
     }
 
     private void setUpButtons() {
@@ -84,24 +100,29 @@ public class PlayPanel {
     }
 
     public void draw(Graphics2D g2) {
-        int tileSize = 10;
-        int temp = 0;
+//        int tileSize = 10;
+//        int temp = 0;
+//
+//        for (int i = 0; i < GAME_WIDTH; i += tileSize) {
+//            for (int j = 0; j < GAME_HEIGHT; j += tileSize) {
+//                if (temp % 2 == 0) {
+//                    g2.setColor(Color.GRAY);
+//                } else {
+//                    g2.setColor(Color.ORANGE);
+//                }
+//
+//                int drawX = i - (int) cameraX;
+//                g2.fillRect(drawX, j, tileSize, tileSize);
+//
+//                temp++;
+//            }
+//            temp++;
+//        }
 
-        for (int i = 0; i < GAME_WIDTH; i += tileSize) {
-            for (int j = 0; j < GAME_HEIGHT; j += tileSize) {
-                if (temp % 2 == 0) {
-                    g2.setColor(Color.GRAY);
-                } else {
-                    g2.setColor(Color.ORANGE);
-                }
+        int drawX = -(int)cameraX;
+        int drawY = 0;
 
-                int drawX = i - (int) cameraX;
-                g2.fillRect(drawX, j, tileSize, tileSize);
-
-                temp++;
-            }
-            temp++;
-        }
+        g2.drawImage(background, drawX, drawY, GAME_WIDTH, GAME_HEIGHT, null);
 
         g2.setColor(Color.WHITE);
         g2.drawString("cameraX: " + (int) cameraX, 20, 20);
